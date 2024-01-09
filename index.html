@@ -29,9 +29,6 @@
         .card {
             margin-bottom: 15px;
         }
-        {
-
-        }
     </style>
     <script>
         $(document).ready(function () {
@@ -43,10 +40,15 @@
             // 1. #star_box의 내부 html 태그를 모두 삭제합니다.
         }
         function onDisplay() {
-            $('comment').show()
-        }
-        function offDisplay() {
-            $('comment').hide()
+            const btn1 = document.getElementsById(my_cmt);
+
+            // btn1 숨기기 (display: none)
+            if (btn1.style.display !== 'none') {
+                btn1.style.display = 'none';
+            }
+            else {
+                btn1.style.display = 'block';
+            }
         }
     </script>
 </head>
@@ -96,146 +98,88 @@
                             <strong>⭐4.8</strong>
                         </p>
                     </div>
-                    <div class="level-right">
-                        <a>
-                            <button onclick="onDisplay" class="button is-right">댓글</button>
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article class="media">
-                <figure class="media-left">
-                </figure>
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong>Barbara Middleton</strong>
-                            <br>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec
-                            ultricies elit blandit non.
-                            <br>
-                            <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
-                        </p>
-                    </div>
-
-                    <article class="media">
-                        <figure class="media-left">
-                        </figure>
-                        <div class="media-content">
-                            <div class="content">
-                                <p>
-                                    <strong>Sean Brown</strong>
-                                    <br>
-                                    Donec sollicitudin urna eget eros malesuada sagittis.
-                                    <br>
-                                    <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
-                                </p>
-                            </div>
-
-                            <article class="media">
-                                Vivamus quis semper metus, non tincidunt dolor.
-                            </article>
-                        </div>
-                    </article>
-                </div>
-            </article>
-
-            <article class="media">
-                <figure class="media-left">
-                </figure>
-                <div class="media-content">
-                    <div class="field">
-                        <p class="control">
-                            <textarea class="textarea" placeholder="Add a comment..."></textarea>
-                        </p>
-                    </div>
-                    <div class="field">
-                        <p class="control">
-                            <button class="button">Post comment</button>
-                        </p>
-                    </div>
                 </div>
             </article>
         </div>
-        <div class="notification">
-            <article class="media">
-                <figure class="media-left">
-                    <p class="image is-128x128">
-                        <img src="https://bulma.io/images/placeholders/128x128.png">
-                    </p>
-                </figure>
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong>가게2명</strong> <small>@johnsmith</small>
-                            <br>
-                            주소
-                            <br>
-                            <strong>별점</strong>
-                        </p>
-                    </div>
-                    <div class="level-right">
-                        <a>
-                            <button class="button is-right">댓글</button>
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article class="media" id = "comment">
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong>Barbara Middleton</strong>
-                            <br>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec
-                            ultricies elit blandit non.
-                            <br>
-                            <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
-                        </p>
-                    </div>
-
-                    <article class="media">
-                        <figure class="media-left">
-                        </figure>
-                        <div class="media-content">
-                            <div class="content">
-                                <p>
-                                    <strong>Sean Brown</strong>
-                                    <br>
-                                    Donec sollicitudin urna eget eros malesuada sagittis.
-                                    <br>
-                                    <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
-                                </p>
-                            </div>
-
-                            <article class="media">
-                                Vivamus quis semper metus, non tincidunt dolor.
-                            </article>
-                        </div>
-                    </article>
-                </div>
+        <div class="level-right">
+            <button onclick="onDisplay()" class="button is-right">댓글</button>
+        </div>
+    </div>
+    <div class='container' id='my_cmt'>
+        <article class="media_first">
+            <figure class="media-left">
+            </figure>
+            <div class="media-content">
                 <article class="media">
                     <figure class="media-left">
                     </figure>
                     <div class="media-content">
-                        <div class="field">
-                            <p class="control">
-                                <textarea class="textarea" placeholder="Add a comment..."></textarea>
+                        <div class="content">
+                            <p>
+                                <strong>만타인</strong>
+                                <br>
+                                밥 먹을 사람 갠톡 ㄱㄱ
+                                <br>
+                                <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
                             </p>
                         </div>
-                        <div class="field">
-                            <p class="control">
-                                <button class="button">Post comment</button>
+
+                    </div>
+                </article>
+
+                <article class="media">
+                    <figure class="media-left">
+                    </figure>
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>티즐</strong>
+                                <br>
+                                저용
+                                <br>
+                                <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
                             </p>
                         </div>
                     </div>
                 </article>
-            </article>
 
+                <article class="media">
+                    <figure class="media-left">
+                    </figure>
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>아카페라</strong>
+                                <br>
+                                뭐야 나도 데려가요
+                                <br>
+                                <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+                            </p>
+                        </div>
 
-        </div>
+                    </div>
+                </article>
 
+            </div>
+        </article>
+        <article class="media">
+            <figure class="media-left">
+            </figure>
+            <div class="media-content">
+                <div class="field">
+                    <p class="control">
+                        <textarea class="textarea" placeholder="댓글 입력"></textarea>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <button class="button">Post comment</button>
+                    </p>
+                </div>
+            </div>
+        </article>
     </div>
+
 
 </body>
 
