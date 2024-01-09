@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <title></title>
+    <script>
+        function goToForm() {
+            //회원가입 페이지로 이동
+            alert("ssdfg");
+            window.location.href = "form.html";
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="container is-max-widescreen">
+        <form class="box">
+            <h1 class="title has-text-left">what do you eat?</h1>
+            <h1 class="title has-text-centered">Login</h1>
+            <div class="field">
+                <label class="label">Email</label>
+                <div class="control">
+                    <input class="input" type="ID" placeholder="e.g. alex@example.com">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                    <input class="input" type="password" placeholder="********">
+                </div>
+            </div>
+
+            <button class="button is-primary">Sign in</button>
+
+            <button class="button is-link" onclick="goToForm()">gotoforms</button>
+        </form>
+    </div>
+   
+</body>
+
+</html>
