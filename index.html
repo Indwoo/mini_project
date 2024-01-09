@@ -29,8 +29,9 @@
         .card {
             margin-bottom: 15px;
         }
-        {
 
+        #media_first {
+            display: none;
         }
     </style>
     <script>
@@ -43,10 +44,15 @@
             // 1. #star_box의 내부 html 태그를 모두 삭제합니다.
         }
         function onDisplay() {
-            $('comment').show()
-        }
-        function offDisplay() {
-            $('comment').hide()
+            const btn1 = document.getElementsById(my-div);
+
+            // btn1 숨기기 (display: none)
+            if (btn1.style.display !== 'none') {
+                btn1.style.display = 'none';
+            }
+            else {
+                btn1.style.display = 'block';
+            }
         }
     </script>
 </head>
@@ -80,82 +86,84 @@
     </div>
     <div class="container">
         <div class="notification is-warning is-light">
-            <article class="media">
-                <figure class="media-left">
-                    <p class="image is-128x128">
-                        <img src="https://bulma.io/images/placeholders/128x128.png">
-                    </p>
-                </figure>
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong>가게명</strong> <small>31m</small>
-                            <br>
-                            인천광역시 부평구 산곡2동
-                            <br>
-                            <strong>⭐4.8</strong>
+            <div id = 'my-div'>
+                <article class="media">
+                    <figure class="media-left">
+                        <p class="image is-128x128">
+                            <img src="https://bulma.io/images/placeholders/128x128.png">
                         </p>
-                    </div>
-                    <div class="level-right">
-                        <a>
-                            <button onclick="onDisplay" class="button is-right">댓글</button>
-                        </a>
-                    </div>
-                </div>
-            </article>
-            <article class="media">
-                <figure class="media-left">
-                </figure>
-                <div class="media-content">
-                    <div class="content">
-                        <p>
-                            <strong>Barbara Middleton</strong>
-                            <br>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec
-                            ultricies elit blandit non.
-                            <br>
-                            <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
-                        </p>
-                    </div>
-
-                    <article class="media">
-                        <figure class="media-left">
-                        </figure>
-                        <div class="media-content">
-                            <div class="content">
-                                <p>
-                                    <strong>Sean Brown</strong>
-                                    <br>
-                                    Donec sollicitudin urna eget eros malesuada sagittis.
-                                    <br>
-                                    <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
-                                </p>
-                            </div>
-
-                            <article class="media">
-                                Vivamus quis semper metus, non tincidunt dolor.
-                            </article>
+                    </figure>
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>가게명</strong> <small>31m</small>
+                                <br>
+                                인천광역시 부평구 산곡2동
+                                <br>
+                                <strong>⭐4.8</strong>
+                            </p>
                         </div>
-                    </article>
-                </div>
-            </article>
+                        <div class="level-right">
+                            <a>
+                                <button onclick="onDisplay()" class="button is-right">댓글</button>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+                <article class="media_first">
+                    <figure class="media-left">
+                    </figure>
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>Barbara Middleton</strong>
+                                <br>
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec
+                                ultricies elit blandit non.
+                                <br>
+                                <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
+                            </p>
+                        </div>
 
-            <article class="media">
-                <figure class="media-left">
-                </figure>
-                <div class="media-content">
-                    <div class="field">
-                        <p class="control">
-                            <textarea class="textarea" placeholder="Add a comment..."></textarea>
-                        </p>
+                        <article class="media">
+                            <figure class="media-left">
+                            </figure>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <strong>Sean Brown</strong>
+                                        <br>
+                                        Donec sollicitudin urna eget eros malesuada sagittis.
+                                        <br>
+                                        <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+                                    </p>
+                                </div>
+
+                                <article class="media">
+                                    Vivamus quis semper metus, non tincidunt dolor.
+                                </article>
+                            </div>
+                        </article>
                     </div>
-                    <div class="field">
-                        <p class="control">
-                            <button class="button">Post comment</button>
-                        </p>
+                </article>
+
+                <article class="media">
+                    <figure class="media-left">
+                    </figure>
+                    <div class="media-content">
+                        <div class="field">
+                            <p class="control">
+                                <textarea class="textarea" placeholder="Add a comment..."></textarea>
+                            </p>
+                        </div>
+                        <div class="field">
+                            <p class="control">
+                                <button class="button">Post comment</button>
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </article>
+                </article>
+            </div>
         </div>
         <div class="notification">
             <article class="media">
@@ -181,7 +189,7 @@
                     </div>
                 </div>
             </article>
-            <article class="media" id = "comment">
+            <article class="media">
                 <div class="media-content">
                     <div class="content">
                         <p>
