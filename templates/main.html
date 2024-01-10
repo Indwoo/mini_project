@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+    <title>Main | 음식점 리스트</title>
+    <style>
+        .center {
+            text-align: center;
+        }
+
+        .star-list {
+            width: 500px;
+            margin: 20px auto 0 auto;
+        }
+
+        .star-name {
+            display: inline-block;
+        }
+
+        .star-name:hover {
+            text-decoration: underline;
+        }
+
+        .card {
+            margin-bottom: 15px;
+        }
+
+
+    </style>
+    <script>
+        const Sort = {
+            BY_LIKES: "likes"
+        }
+        let displaymode = false //댓글 창 
+        let sortMode = Sort.BY_LIKES
+
+        $(document).ready(function () {
+            showReply();
+            // index.html 로드가 완료되면 자동으로 showStar() 함수를 호출합니다.
+            showStore();
+
+            displaySorter(sortMode)
+        });
+
+        function changeSorter(newMode) {
+            if (sortMode == newMode) {
+                return
+            }
+
+            sortMode = newMode
+            displaySorter(sortMode)
+            showStore()
+        }
+
+        function displaySorter(sortMode) {
+            if(sortMode == 'likes'){
+                document.getElementById("sorter-likes").classList.add("active")         //활성화
+                document.getElementById("sorter-replys").classList.remove("active")    //비활성화
+            }
+            else if(sortMode == 'replys'){
+                document.getElementById("sorter-replys").classList.add("active")
+                document.getElementById("sorter-likes").classList.remove("active")
+            }
+            
+        }
+
+        function showStore() {
+            $('#store-box').empty()
+
+            $.ajax({
+                type:"GET",
+                url:"/list",
+                data:{'sortMode':sortMode},
+                success: function(response){
+                    if (response['result'] != 'success') {
+                        alert(sortMode + ' 순으로 식당 목록 받아오기 실패!')
+                        return
+                    }
+                    // 3. 서버가 돌려준 stars_list를 movies 라는 변수에 저장합니다.
+                    let stores = response['store_list']
+                    // 4. 영화 카드를 추가합니다. 이 때 휴지통 여부에 따라 카드 모양이 달라지므로 휴지통 여부(=false)도 같이 전달합니다.
+                    addMovieCards(stores)
+                }
+            })
+        }
+
+        function addMovieCards(stores){
+            for (let i = 0; i < stores.length; i++) {
+                let store = stores[i]
+
+                let title = store['title']
+                let addr = store['address']
+                let like = store['like']
+                let url = store['url']
+
+                let cardContentHtml =
+                `
+                <article class="media">
+                    <figure class="media-left">
+                        <p class="image is-128x128">
+                            <img src="https://bulma.io/images/placeholders/128x128.png">
+                        </p>
+                    </figure>
+                    <div class="media-content" id ="info">
+                        <div class="content">
+                            <p>
+                                <a href = ${url} class ="store-title">${title}</a><br>
+                                <span class="store-addr">${addr}</span>
+                                <span class="movie-likes">⭐${likes}</span><br/>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="level-right">
+                        <button id= "btn-replay" onclick="displayMode()" class="button is-right">댓글</button>
+                    </div>
+                </article>
+                `
+
+                $('#store-box').append(cardContentHtml)
+            }
+        }
+        function onDisplay(displaymode) {
+
+            if(displaymode == false){
+                $("#post-box").hide();
+                displaymode = true
+            }
+            else{
+                $("#post-box").show();
+                displaymode = false
+            }
+        }
+
+        function displayMode(){
+            if(displaymode == false){
+                displaymode = true
+            }else{
+                displaymode = false
+            }
+
+            onDisplay(displaymode)
+        }
+
+        function postReply(){
+            let comment = $("#post-comment").val();
+
+            // 2. reply에 POST 방식으로 댓글 생성 요청하기
+            $.ajax({
+                type: "POST",
+                url: "/reply",
+                data: {comment_give : comment},
+                success: function (response){
+                    if(response["result"] == "success"){
+                        alert("댓글 작성 성공!")
+                        window.location.reload();
+                    }else{
+                        alrt("서버 오류!")
+                    }
+                } 
+            })
+        }
+
+        function showReply(){
+            $.ajax({
+                type: "GET",
+                url: "/reply",
+                data: {},
+                success: function (response) {
+                    let articles = response["articles"];
+                    console.log(articles);
+                    for (let i = 0; i < articles.length; i++) {
+                        makeReply(articles[i]["comment"]);
+                    }
+                  }             
+              })
+        }
+
+        function makeReply(comment){
+            let tempHtml = 
+            ` <article class="media">
+                <figure class="media-left">
+                </figure>
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong>이름</strong>
+                            <br>${comment}<br>
+                            <small><a>Like</a> · <a>Reply</a> · 2 hrs</small>
+                        </p>
+                    </div>
+                </div>
+            </article>`
+            
+            $("#reply-box").append(tempHtml);
+        }
+    </script>
+</head>
+
+<body>
+    <section class="hero is-warning">
+        <div class="hero-body">
+            <div class="container center">
+                <h1 class="title">
+                    뭐 먹을래❓
+                </h1>
+                <h3 class="subtitle">
+                    먹고 싶은 곳을 골라 같이 먹을 친구를 찾아봐요
+                </h3>
+            </div>
+        </div>
+    </section>
+    <div class="star-list" id="star-box">
+        <div class="card">
+            <footer class="card-footer">
+                <a href="#" id="sorter-likes" onclick="changeSorter('likes')" class="card-footer-item has-text-info">
+                    별점 순으로 보기!
+
+                </a>
+                <a href="#" id="sorter-replys" onclick="changeSorter('replys')" class="card-footer-item has-text-danger">
+                    댓글 많은 순으로 보기!
+
+                </a>
+            </footer>
+        </div>
+    </div>
+    <div class="container">
+        <div class="notification is-warning is-light">
+            <div class ="container" id ="store-box">
+            <div class='container' id="post-box" style ="display:none" > 
+                <div class ='container' id ="reply-box" > <!--style ="overflow-y: scroll; height:200px;" !-->
+
+                    <article class="media_first">
+                        <figure class="media-left"></figure>
+                    </article>
+                </div>
+                <article class="media">
+                    <figure class="media-left"> </figure>
+                    <div class="media-content">
+                        <div class="field">
+                            <textarea id ="post-comment" class="textarea" placeholder="댓글 입력"></textarea>
+                        </div>
+                        <div class="field">
+                            <p class="control">
+                                <button onclick="postReply()" class="button">댓글 작성</button>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    
+        <div class="notification is-warning is-light">
+            <article class="media">
+                <figure class="media-left">
+                    <p class="image is-128x128">
+                        <img src="https://bulma.io/images/placeholders/128x128.png">
+                    </p>
+                </figure>
+                <div class="media-content">
+                    <div class="content">
+                        <p>
+                            <strong>가게명</strong> <small>31m</small>
+                            <br>
+                            인천광역시 부평구 산곡2동
+                            <br>
+                            <strong>⭐4.8</strong>
+                        </p>
+                    </div>
+                </div>
+                <div class="level-right">
+                    <button id= "btn-replay" onclick="displayMode()" class="button is-right">댓글</button>
+                </div>
+            </article>
+            <div class='container' id="post-box" style ="display:none" > 
+                <div class ='container' id ="reply-box" style ="overflow-y: scroll; height:200px;">
+                    <article class="media_first">
+                        <figure class="media-left"></figure>
+                    </article>
+                </div>
+                <article class="media">
+                    <figure class="media-left"> </figure>
+                    <div class="media-content">
+                        <div class="field">
+                            <textarea id ="post-comment" class="textarea" placeholder="댓글 입력"></textarea>
+                        </div>
+                        <div class="field">
+                            <p class="control">
+                                <button onclick="postReply()" class="button">댓글 작성</button>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        
+    </div>
+    
+    
+   
+
+
+
+</body>
+
+</html>
