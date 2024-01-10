@@ -5,7 +5,11 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <title></title>
-   
+    <script>
+        function gotoForms() {
+            location.href = '/signup';
+        }
+    </script>
 </head>
 
 <body>
@@ -28,9 +32,10 @@
                 </div>
             </div>
 
-            <button class="button is-primary">Sign in</button>
+            <button type = "button" class="button is-primary">Sign in</button>
 
-            <button class="button is-link" type = "button" onclick="location.href = 'form.html'">gotoforms</button>
+            <button type = "button" class="button is-link" onclick="window.location.href = '/signup'">Go to Signup</button>
+
         </form>
     </div>
    
