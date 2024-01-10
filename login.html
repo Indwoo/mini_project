@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <title></title>
+    <script>
+        function gotoForms() {
+            location.href = '/signup';
+        }
+    </script>
+    <style>
+        .body{
+            background-color: #F8E372;
+        }
+        #login_box {
+            top: 50%;
+            left: 50%;
+            bottom: 50%;
+            border: solid;
+        }
+
+        .section {
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            position: relative;
+            padding: 10px 10px 10px 10px;
+        }
+
+        .slide {
+            float: left;
+            height: 100%;
+            width: 100%;
+            position: relative;
+            opacity: 0.5;
+            animation: fade 5s ease 3s;
+            -webkit-animation: fadein 3s;
+        }
+
+        .img {
+            position: absolute;
+            width: auto;
+            height: auto;
+        }
+
+        @keyframes fadein {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @-webkit-keyframes fadein {
+
+            /* Safari and Chrome */
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+        .title{
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="section">
+        <div class="slide">
+            <img src="./assets/회.jpg" alt="이미지 1">
+        </div>
+        <div class="slide">
+            <img src="./assets/고기.jpg" alt="이미지 2">
+        </div>
+        <div class="slide">
+            <img src="./assets/국밥.png" alt="이미지 3">
+        </div>
+        <div class="slide">
+            <img src="./assets/짜장면.png" alt="이미지 4">
+        </div>
+        <div class="slide">
+            <img src="./assets/초밥.png" alt="이미지 5">
+        </div>
+        <div class="slide">
+            <img src="./assets/정식.jpg" alt="이미지 6">
+        </div>
+        <div class="slide">
+            <img src="./assets/피자.jpg" alt="이미지 7">
+        </div>
+        <div class="slide">
+            <img src="./assets/카레.jpg" alt="이미지 8">
+        </div>
+        <div class="slide">
+            <img src="./assets/부리또.jpg" alt="이미지 9">
+        </div>
+    </section>
+    <div class = 'title'>
+        <h1 class="title is-size-1">뭐 먹을래❓</h1>
+    </div>
+    <div class="container is-max-widescreen">
+        <form class="box" id="login_box">
+            <h1 class="title has-text-centered">Login</h1>
+            <div class="field">
+                <label class="label">ID</label>
+                <div class="control">
+                    <input class="input" type="ID" placeholder="아이디를 입력해주세요.">
+                </div>
+            </div>
+
+            <div class="field">
+                <label class="label">Password</label>
+                <div class="control">
+                    <input class="input" type="password" placeholder="******">
+                </div>
+            </div>
+
+            <button type="button" class="button is-primary">로그인</button>
+
+            <button type="button" class="button is-link" onclick="window.location.href = '/signup'">회원가입</button>
+            <section class="section">
+                <br><br><br>
+            </section>
+        </form>
+    </div>
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const slideCount = slides.length;
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.style.display = 'none');
+            slides[n].style.display = 'block';
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slideCount;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+            showSlide(currentSlide);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showSlide(currentSlide);
+            setInterval(nextSlide, 3000); // 3초마다 자동 슬라이드
+        });
+    </script>
+
+</body>
+
+</html>
