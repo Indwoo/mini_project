@@ -29,6 +29,7 @@
         .card {
             margin-bottom: 15px;
         }
+<<<<<<< Updated upstream:templates/index.html
 <<<<<<< HEAD
 <<<<<<< HEAD:index.html
 =======
@@ -37,6 +38,10 @@
 =======
         
 >>>>>>> 3abb6651656b01fc67cca9441a79b778b3057397
+=======
+
+  
+>>>>>>> Stashed changes:index.html
     </style>
     <script>
         $(document).ready(function () {
@@ -48,10 +53,17 @@
             // 1. #star_box의 내부 html 태그를 모두 삭제합니다.
         }
         function onDisplay() {
-            $('comment').show()
-        }
-        function offDisplay() {
-            $('comment').hide()
+            // 토글 할 곳 선택
+            const cmt = document.getElementById('user_cmt');
+
+            // 댓글 숨기기 (display: none)
+            if (cmt.style.display !== 'none') {
+                cmt.style.display = 'none';
+            }
+            // 댓글 보이기 (display: block)
+            else {
+                cmt.style.display = 'block';
+            }
         }
     </script>
 </head>
@@ -84,7 +96,7 @@
         </div>
     </div>
     <div class="container">
-        <div class="notification is-warning is-light">
+        <div id = "user_review" class="notification is-warning is-light" >
             <article class="media">
                 <figure class="media-left">
                     <p class="image is-128x128">
@@ -103,12 +115,12 @@
                     </div>
                     <div class="level-right">
                         <a>
-                            <button onclick="onDisplay" class="button is-right">댓글</button>
+                            <button id="btn_cmt" onclick="onDisplay()" class="button is-right">댓글</button>
                         </a>
                     </div>
                 </div>
             </article>
-            <article class="media">
+            <article class="media" id = "user_cmt">
                 <figure class="media-left">
                 </figure>
                 <div class="media-content">
@@ -186,7 +198,7 @@
                     </div>
                 </div>
             </article>
-            <article class="media" id = "comment">
+            <article class="media" id="comment">
                 <div class="media-content">
                     <div class="content">
                         <p>
