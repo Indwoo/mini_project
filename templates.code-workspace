@@ -1,0 +1,13 @@
+{
+	"folders": [
+		{
+			"name": "templates",
+			"path": "../new_firstProject/templates"
+		},
+		{
+			"name": "mini_project",
+			"path": "."
+		}
+	],
+	"settings": {}
+}
