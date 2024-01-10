@@ -13,64 +13,78 @@
             location.href = '/';  // 이동하려는 페이지의 경로를 설정하세요
         }
         function gogo() {
-                var name = document.querySelector('input[name="name"]').value;
-                var user_id = document.querySelector('input[name="user_id"]').value;
-                var password = document.querySelector('input[name="password"]').value;
-                var kakao_id = document.querySelector('input[name="kakao_id"]').value;
+            var name = document.querySelector('input[name="name"]').value;
+            var user_id = document.querySelector('input[name="user_id"]').value;
+            var password = document.querySelector('input[name="password"]').value;
+            var kakao_id = document.querySelector('input[name="kakao_id"]').value;
 
-                $.ajax({
-                    type: "POST",
-                    url: "/submit",
-                    data: {
-                        'name': name,
-                        'user_id': user_id,
-                        'password': password,
-                        'kakao_id': kakao_id
-                    },
-                    success: function (response) {
-                        if (response['result'] == 'success') {
-                            alert('회원가입 완료!')
-                        } else {
-                            alert('좋아요 실패ㅠㅠ')
-                        }
+            $.ajax({
+                type: "POST",
+                url: "/submit",
+                data: {
+                    'name': name,
+                    'user_id': user_id,
+                    'password': password,
+                    'kakao_id': kakao_id
+                },
+                success: function (response) {
+                    if (response['result'] == 'success') {
+                        alert('회원가입 완료!')
+                    } else {
+                        alert('좋아요 실패ㅠㅠ')
                     }
-                });
-            }
+                }
+            });
+        }
     </script>
+    <style>
+        body {
+            background: linear-gradient(to bottom, rgb(255, 201, 14), orange);
+            height: auto;
+        }
+
+        .control {
+            width: 500px;
+        }
+    </style>
 </head>
 
 <body>
-    <div class="container is-max-widescreen">
-        <h1 class="title has-text-centered">Form</h1>
-        <form action="/signup" method="post">
-            <div class="field">
-                <label class="label">Name</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="e.g Alex Smith" name="name">
+    <div class="container is-max-widescreen" style="width: auto; background-color: #FFF3D7;">
+        <h1 class="title has-text-centered"><br><br><br><br><br><br><br><br><br><br></h1>
+        <h1 class="title is-size-1" style="text-align: center;">회원가입</h1>
+        <form action="/signup" method="post" style="padding: 0 30% 30% 30%;">
+            <div style="border: solid; padding: 10px; margin-bottom: 10px;">
+                <div class="field">
+                    <label class="label">이름</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="예) 홍길동" name="name" style="width: 430px;">
+                    </div>
                 </div>
-            </div>
 
-            <div class="field">
-                <label class="label">ID</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="e.g. alexsmith@gmail.com" name="user_id">
+                <div class="field">
+                    <label class="label">아이디</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="e.g. minipro0111" name="user_id" style="width: 430px;">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">비밀번호</label>
+                    <div class="control">
+                        <input class="input" type="password" placeholder="******" name="password" style="width: 430px;">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">KakaoTalkID</label>
+                    <div class="control">
+                        <input class="input" type="text" placeholder="밥친구를 찾기 위해 정확히 입력해주세요!" name="kakao_id" style="width: 430px;">
+                    </div>
                 </div>
             </div>
-            <div class="field">
-                <label class="label">PW</label>
-                <div class="control">
-                    <input class="input" type="password" placeholder="********" name="password">
-                </div>
-            </div>
-            <div class="field">
-                <label class="label">KakaoTalkID</label>
-                <div class="control">
-                    <input class="input" type="text" placeholder="e.g. alexsmith@gmail.com" name="kakao_id">
-                </div>
-            </div>
-            <button type = "button" class="button is-link" onclick="gogo()">gogo</button>
+            <button type="button" class="button is-link" onclick="gogo()">gogo</button>
 
-            <button type = "button" class="button is-link" onclick="window.location.href = '/'">Back to Login</button>
+            <button type="button" class="button is-link" onclick="window.location.href = '/'">Back to Login</button>
+            <br><br><br><br><br><br>
         </form>
     </div>
 </body>
