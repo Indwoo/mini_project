@@ -12,14 +12,17 @@
         }
     </script>
     <style>
-        .body{
-            background-color: #F8E372;
+        body {
+            background: linear-gradient(to bottom, rgb(255, 201, 14), orange);
+            height: 100%;
         }
+
         #login_box {
             top: 50%;
             left: 50%;
             bottom: 50%;
             border: solid;
+            padding-left: 10%;
         }
 
         .section {
@@ -47,6 +50,7 @@
             height: auto;
         }
 
+
         @keyframes fadein {
             from {
                 opacity: 0;
@@ -68,95 +72,115 @@
                 opacity: 1;
             }
         }
-        .title{
+
+        .title {
             text-align: center;
         }
+
+        .div_indwoo {
+            height: 100%;
+            width: auto;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+        .control{
+            width: 500px;
+        }
+
     </style>
 </head>
 
 <body>
-    <section class="section">
-        <div class="slide">
-            <img src="./assets/회.jpg" alt="이미지 1">
-        </div>
-        <div class="slide">
-            <img src="./assets/고기.jpg" alt="이미지 2">
-        </div>
-        <div class="slide">
-            <img src="./assets/국밥.png" alt="이미지 3">
-        </div>
-        <div class="slide">
-            <img src="./assets/짜장면.png" alt="이미지 4">
-        </div>
-        <div class="slide">
-            <img src="./assets/초밥.png" alt="이미지 5">
-        </div>
-        <div class="slide">
-            <img src="./assets/정식.jpg" alt="이미지 6">
-        </div>
-        <div class="slide">
-            <img src="./assets/피자.jpg" alt="이미지 7">
-        </div>
-        <div class="slide">
-            <img src="./assets/카레.jpg" alt="이미지 8">
-        </div>
-        <div class="slide">
-            <img src="./assets/부리또.jpg" alt="이미지 9">
-        </div>
-    </section>
-    <div class = 'title'>
-        <h1 class="title is-size-1">뭐 먹을래❓</h1>
-    </div>
-    <div class="container is-max-widescreen">
-        <form class="box" id="login_box">
-            <h1 class="title has-text-centered">Login</h1>
-            <div class="field">
-                <label class="label">ID</label>
-                <div class="control">
-                    <input class="input" type="ID" placeholder="아이디를 입력해주세요.">
-                </div>
-            </div>
-
-            <div class="field">
-                <label class="label">Password</label>
-                <div class="control">
-                    <input class="input" type="password" placeholder="******">
-                </div>
-            </div>
-
-            <button type="button" class="button is-primary">로그인</button>
-
-            <button type="button" class="button is-link" onclick="window.location.href = '/signup'">회원가입</button>
+    <div class="container is-max-widescreen" style="padding: 0px 0 0 0;">
+        <div class="div_indwoo">
             <section class="section">
-                <br><br><br>
+                <div class="slide">
+                    <img src="./assets/회.jpg" alt="이미지 1">
+                </div>
+                <div class="slide">
+                    <img src="./assets/고기.jpg" alt="이미지 2">
+                </div>
+                <div class="slide">
+                    <img src="./assets/국밥.png" alt="이미지 3">
+                </div>
+                <div class="slide">
+                    <img src="./assets/짜장면.png" alt="이미지 4">
+                </div>
+                <div class="slide">
+                    <img src="./assets/초밥.png" alt="이미지 5">
+                </div>
+                <div class="slide">
+                    <img src="./assets/정식.jpg" alt="이미지 6">
+                </div>
+                <div class="slide">
+                    <img src="./assets/피자.jpg" alt="이미지 7">
+                </div>
+                <div class="slide">
+                    <img src="./assets/카레.jpg" alt="이미지 8">
+                </div>
+                <div class="slide">
+                    <img src="./assets/부리또.jpg" alt="이미지 9">
+                </div>
             </section>
-        </form>
+            <div class='title'>
+                <br>
+                <h1 class="title is-size-1">뭐 먹을래❓</h1>
+                <br>
+            </div>
+            <div class="container is-max-widescreen" style="width: 60%; background-color: antiquewhite;">
+                <form class="box" id="login_box">
+                    <br>
+                    <h6 class="subtitle is-2">Login</h6>
+                    <div class="field">
+                        <label class="label">ID</label>
+                        <div class="control">
+                            <input class="input" type="ID" placeholder="아이디를 입력해주세요.">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label class="label">Password</label>
+                        <div class="control">
+                            <input class="input" type="password" placeholder="******">
+                        </div>
+                    </div>
+
+                    <button type="button" class="button is-warning">로그인</button>
+
+                    <button type="button" class="button is-warning"
+                        onclick="window.location.href = '/signup'">회원가입</button>
+                    <section class="section">
+                        <br><br><br>
+                    </section>
+                </form>
+            </div>
+            <br><br><br><br><br>
+            <script>
+                let currentSlide = 0;
+                const slides = document.querySelectorAll('.slide');
+                const slideCount = slides.length;
+
+                function showSlide(n) {
+                    slides.forEach(slide => slide.style.display = 'none');
+                    slides[n].style.display = 'block';
+                }
+
+                function nextSlide() {
+                    currentSlide = (currentSlide + 1) % slideCount;
+                    showSlide(currentSlide);
+                }
+
+                function prevSlide() {
+                    currentSlide = (currentSlide - 1 + slideCount) % slideCount;
+                    showSlide(currentSlide);
+                }
+
+                document.addEventListener('DOMContentLoaded', () => {
+                    showSlide(currentSlide);
+                    setInterval(nextSlide, 3000); // 3초마다 자동 슬라이드
+                });
+            </script>
+        </div>
     </div>
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.slide');
-        const slideCount = slides.length;
-
-        function showSlide(n) {
-            slides.forEach(slide => slide.style.display = 'none');
-            slides[n].style.display = 'block';
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % slideCount;
-            showSlide(currentSlide);
-        }
-
-        function prevSlide() {
-            currentSlide = (currentSlide - 1 + slideCount) % slideCount;
-            showSlide(currentSlide);
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            showSlide(currentSlide);
-            setInterval(nextSlide, 3000); // 3초마다 자동 슬라이드
-        });
-    </script>
 
 </body>
 
