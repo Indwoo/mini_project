@@ -4,11 +4,35 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+     <!-- jQuery 를 포함합니다. -->
+     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title></title>
     <script>
         function gotoForms() {
             location.href = '/signup';
         }
+        function goSignIn() {
+                
+                var user_id = document.querySelector('input[name="user_id"]').value;
+                var password = document.querySelector('input[name="password"]').value;
+                
+                $.ajax({
+                    type: "POST",
+                    url: "/signin",
+                    data: {
+                        'user_id': user_id,
+                        'password': password,
+                    },
+                    success: function (response) {
+                        if (response['result'] == 'success') {
+                            alert('로그인 완료!')
+                            location.href = '/category';
+                        } else {
+                            alert('해당 아이디 혹은 비밀번호가 틀립니다.')
+                        }
+                    }
+                });
+            }
     </script>
 </head>
 
@@ -21,18 +45,18 @@
             <div class="field">
                 <label class="label">Email</label>
                 <div class="control">
-                    <input class="input" type="ID" placeholder="e.g. alex@example.com">
+                    <input class="input" type="ID" placeholder="e.g. alex@example.com" name="user_id">
                 </div>
             </div>
 
             <div class="field">
                 <label class="label">Password</label>
                 <div class="control">
-                    <input class="input" type="password" placeholder="********">
+                    <input class="input" type="password" placeholder="********" name="password">
                 </div>
             </div>
 
-            <button type = "button" class="button is-primary">Sign in</button>
+            <button type = "button" class="button is-link" onclick="goSignIn()">Sign in</button>
 
             <button type = "button" class="button is-link" onclick="window.location.href = '/signup'">Go to Signup</button>
 

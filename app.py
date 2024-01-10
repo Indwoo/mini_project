@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 # 이하 MongoDB 설정은 이전과 동일하게 유지
 # MongoDB 연결 설정
-client = MongoClient('mongodb://localhost:27017/')
+client = MongoClient('mongodb://test:test@54.180.112.156',27017)
 db = client.db_jungle_firstPro
 
 #####################################################################################
@@ -47,13 +47,32 @@ app.json = CustomJSONProvider(app)
 def index():
     return render_template('login.html')
 
+@app.route('/category')
+def select_category():
+    return render_template('category.html')
+
+@app.route('/signin', methods=['POST'])
+def signin():
+    user_id = request.form.get('user_id') 
+    password = request.form.get('password')
+    print(user_id)
+    print(password)
+
+    loginUser = db.users.count_documents({"user_id":user_id, "password" : password })
+    print(loginUser)
+
+    if loginUser == 0:
+        return jsonify({'result': 'failure'})
+    else:
+        return jsonify({'result': 'success'})
+
 @app.route('/signup')
 def signup():
     return render_template('form.html')
 
 @app.route('/submit', methods=['POST'])
 def submit_signup():
-    # 여기에 회원가입 처리 로직을 추가하세요.
+    
     # HTML에서 전송된 데이터 받기
     name = request.form.get('name')
     user_id = request.form.get('user_id') 
