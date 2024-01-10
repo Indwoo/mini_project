@@ -8,8 +8,15 @@ here = (37.29963, 127.0340)  #Latitude, Longitude
 # csv 파일 경로
 df = pd.read_csv('경기대양식.csv')
 
-df_data= df[["이름", "도로명주소", "방문자 평점", "상세페이지URL"]]
+df_data= df[["이름", "도로명주소", "방문자 평점", "상세페이지URL", "위도", "경도"]]
+df_data["거리"] = ''
+for item in df_data:
+    df_data["거리"] = haversine(here, (df_data["위도"], df_data["경도"]), unit = 'm')
+
 df_data = df_data.dropna()
 
+print(df_data.head())
+'''
 df_data.to_json('usa.json', force_ascii=False, orient= 'records', indent=4)
 df_data.to_csv("usa.csv", index=False, encoding="utf-8-sig")
+'''
